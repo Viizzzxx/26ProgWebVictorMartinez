@@ -5,3 +5,8 @@ p {
 .destacado {
     background-color: lightyellow;
 }
+
+/* Ejercicio 2: Selector de ID */
+#foto-perfil {
+    border: 2px dotted red;
+}
