@@ -10,3 +10,8 @@ p {
 #foto-perfil {
     border: 2px dotted red;
 }
+
+/* Ejercicio 3: Selector de atributo */
+a[target="_blank"]::after {
+    content: " 🔗";
+}
