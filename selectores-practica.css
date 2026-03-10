@@ -35,3 +35,13 @@ h2 + p {
 h2 ~ p {
     color: lightgray;
 }
+
+/* Ejercicio 8: desafio final*/
+.intro p {
+    border-left: 6px solid orange;
+    padding-left: 10px;
+}
+
+#contacto a[target="_blank"] {
+    color: green;
+}
