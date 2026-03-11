@@ -1,0 +1,34 @@
+/* Especificidad: 0,0,0,1 */
+p {
+    color: black;
+}
+
+/* por elemento */
+
+/* Especificidad: 0,0,1,0 */
+.destacado {
+    color: purple;
+}
+
+/* por clase */
+
+/* Especificidad: 0,1,0,0 */
+#principal {
+    color: blue;
+}
+
+/* por id */
+
+/* Especificidad: 0,1,1,0 */
+#principal.destacado {
+    color: cyan;
+}
+
+/* id y clase */
+
+/* Especificidad: 0,1,1,0 */
+#principal .destacado {
+    color: green;
+}
+
+/* destacado hijo de principal */

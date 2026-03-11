@@ -6,42 +6,35 @@ p {
     background-color: lightyellow;
 }
 
-/* Ejercicio 2: Selector de ID */
-#foto-perfil {
+.foto-perfil {
     border: 2px dotted red;
 }
 
-/* Ejercicio 3: Selector de atributo */
 a[target="_blank"]::after {
     content: " 🔗";
 }
 
-/* Ejercicio 4: Combinador descendiente */
-#experiencia p {
+.experiencia p {
     font-size: 0.9em;
 }
 
-/* Ejercicio 5: Combinador hijo directo */
-#experiencia > ul > li {
+.experiencia > ul > li {
     list-style-type: square;
 }
 
-/* Ejercicio 6: Combinador hermano adyacente */
 h2 + p {
     margin-top: 0;
 }
 
-/* Ejercicio 7: Combinador hermano general */
 h2 ~ p {
     color: lightgray;
 }
 
-/* Ejercicio 8: desafio final*/
-.intro p {
+p.intro {
     border-left: 6px solid orange;
     padding-left: 10px;
 }
 
-#contacto a[target="_blank"] {
+.contacto a[target="_blank"] {
     color: green;
 }
