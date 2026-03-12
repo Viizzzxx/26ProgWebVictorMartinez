@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ejercicios de Especificidad CSS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Ejercicios de especificidad CSS</h1>
+
+  <!-- Ejercicio 1 -->
+  <section class="bloque">
+    <h2>Ejercicio 1</h2>
+    <div id="contenedor-e1">
+      <p class="texto" id="parrafo">Texto 1</p>
+      <p class="texto">Texto 2</p>
+    </div>
+    <p class="texto">Texto 3</p>
+  </section>
+
+  <!-- Ejercicio 2 -->
+  <section class="bloque">
+    <h2>Ejercicio 2</h2>
+    <ul class="lista-e2">
+      <li class="item" id="primero">Elemento 1</li>
+      <li class="item">Elemento 2</li>
+      <li>Elemento 3</li>
+    </ul>
+  </section>
+
+  <!-- Ejercicio 3 -->
+  <section class="bloque">
+    <h2>Ejercicio 3</h2>
+    <section id="main-e3">
+      <div class="caja">
+        <p>Texto A</p>
+        <p class="resaltado">Texto B</p>
+      </div>
+      <p class="resaltado">Texto C</p>
+    </section>
+  </section>
+
+  <!-- Ejercicio 4 -->
+  <section class="bloque">
+    <h2>Ejercicio 4</h2>
+    <article class="articulo-e4">
+      <h2 class="titulo">Título</h2>
+      <p class="contenido">Párrafo 1</p>
+      <p class="contenido" id="ultimo">Párrafo 2</p>
+    </article>
+  </section>
+
+  <!-- Ejercicio 5 -->
+  <section class="bloque">
+    <h2>Ejercicio 5</h2>
+    <nav class="nav-e5">
+      <ul class="menu">
+        <li><a href="#" class="enlace">Inicio</a></li>
+        <li><a href="#">Servicios</a></li>
+        <li><a href="#" id="contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </section>
+
+  <!-- Ejercicio 6 -->
+  <section class="bloque">
+    <h2>Ejercicio 6</h2>
+    <div id="padre">
+      <div class="hijo">
+        <p class="nieto">Texto X</p>
+      </div>
+      <p class="hijo">Texto Y</p>
+    </div>
+  </section>
+
+  <!-- Ejercicio 7 -->
+  <section class="bloque">
+    <h2>Ejercicio 7</h2>
+    <form id="registro">
+      <input type="text" name="usuario" class="campo" placeholder="Usuario" />
+      <input type="password" name="clave" class="campo" placeholder="Contraseña" />
+      <input type="submit" value="Enviar" id="btn" />
+    </form>
+  </section>
+
+  <!-- Ejercicio 8 -->
+  <section class="bloque">
+    <h2>Ejercicio 8</h2>
+    <div class="card" id="card1">
+      <h3 class="card-title">Título 1</h3>
+      <p class="card-text">Texto 1</p>
+    </div>
+
+    <div class="card" id="card2">
+      <h3 class="card-title">Título 2</h3>
+      <p class="card-text">Texto 2</p>
+    </div>
+  </section>
+
+  <!-- Ejercicio 9 -->
+  <section class="bloque">
+    <h2>Ejercicio 9</h2>
+    <main class="main-e9">
+      <section class="seccion" id="s1">
+        <p>Párrafo 1</p>
+        <p class="especial">Párrafo 2</p>
+      </section>
+      <section class="seccion">
+        <p>Párrafo 3</p>
+      </section>
+    </main>
+  </section>
+
+  <!-- Ejercicio 10 -->
+  <section class="bloque">
+    <h2>Ejercicio 10</h2>
+    <div class="contenedor" id="contenedor">
+      <p>Párrafo A</p>
+      <div class="interno">
+        <p class="destacado">Párrafo B</p>
+      </div>
+      <p class="destacado">Párrafo C</p>
+    </div>
+  </section>
+</body>
+</html>
