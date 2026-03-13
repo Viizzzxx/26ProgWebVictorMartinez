@@ -36,9 +36,12 @@ h1{
 
 .contenedor{
     width: 906px;
-    margin: auto;
+    max-width: 100%;
+    margin: 20px auto;
     border: 3px solid black;
-    background: white;
+    background: #e6f2ff;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .card{
