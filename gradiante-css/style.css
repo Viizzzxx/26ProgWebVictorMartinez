@@ -1,69 +1,124 @@
+@keyframes moverGradiente {
+ 0% {
+  background-position: 0% 50%;
+ }
+ 50% {
+  background-position: 100% 50%;
+ }
+ 100% {
+  background-position: 0% 50%;
+ }
+}
+
 /* 4. Fondo general */
 body {
- background: conic-gradient(from 90deg, red, yellow, green, blue);
+ background:
+   linear-gradient(rgba(255,255,255,0.04), rgba(255,255,255,0.04)),
+   radial-gradient(circle at top left, #1a2a6c, transparent 35%),
+   radial-gradient(circle at bottom right, #fdbb2d, transparent 30%),
+   linear-gradient(135deg, #0f2027, #203a43, #2c5364);
  min-height: 100vh;
  font-family: Arial, sans-serif;
+ color: white;
 }
 
 /* 1. Bloques */
 header {
- background: linear-gradient(135deg, #667eea, #764ba2);
+ background: linear-gradient(270deg, #1e3c72, #2a5298, #6a11cb, #2575fc);
+ background-size: 300% 300%;
  color: white;
  padding: 20px;
  text-align: center;
+ border-radius: 12px;
+ animation: moverGradiente 6s ease infinite;
 }
 
 .caja {
- background: linear-gradient(to right, #ff7e5f, #feb47b);
+ background: radial-gradient(circle, #11998e, #38ef7d);
  padding: 20px;
  margin-top: 10px;
+ color: white;
+ border-radius: 10px;
 }
 
 /* 2. Inline */
 .inline {
- background: radial-gradient(circle, yellow, orange);
- padding: 5px;
+ background: radial-gradient(circle, #f7971e, #ffd200);
+ padding: 5px 8px;
+ border-radius: 6px;
+ color: #222;
 }
 
 .link-gradiente {
  display: inline-block;
- background: linear-gradient(to right, cyan, blue);
- padding: 5px 10px;
+ background: linear-gradient(to left, #36d1dc, #5b86e5);
+ padding: 8px 14px;
  color: white;
  text-decoration: none;
+ border-radius: 8px;
+ transition: 0.3s ease;
+}
+
+.link-gradiente:hover {
+ transform: scale(1.05);
 }
 
 /* 3. Botón */
 .btn {
- background: linear-gradient(to right, #ff416c, #ff4b2b);
+ background: linear-gradient(270deg, #fc466b, #3f5efb, #00c9ff, #92fe9d);
+ background-size: 300% 300%;
  border: none;
  padding: 10px 20px;
  color: white;
  cursor: pointer;
+ border-radius: 8px;
+ transition: all 0.3s ease;
+ animation: moverGradiente 4s ease infinite;
+}
+
+.btn:hover {
+ background: linear-gradient(to right, #00c9ff, #92fe9d);
+ transform: translateY(-2px);
+ box-shadow: 0 8px 18px rgba(0,0,0,0.2);
 }
 
 /* 5. Texto gradiente */
 .texto-gradiente {
- background: linear-gradient(45deg, #f06, #f90);
+ background: linear-gradient(45deg, #ff6a00, #ee0979, #8e2de2);
  -webkit-background-clip: text;
+ background-clip: text;
  color: transparent;
+ display: inline-block;
 }
 
 /* 6. Imagen overlay */
 .img-container {
  position: relative;
  display: inline-block;
+ overflow: hidden;
+ border-radius: 12px;
 }
 
 .img-container img {
  display: block;
+ transition: transform 0.4s ease;
 }
 
 .img-container::after {
  content: "";
  position: absolute;
  inset: 0;
- background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+ background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+ opacity: 0;
+ transition: opacity 0.4s ease;
+}
+
+.img-container:hover::after {
+ opacity: 1;
+}
+
+.img-container:hover img {
+ transform: scale(1.05);
 }
 
 /* 7. Lista */
@@ -81,23 +136,56 @@ li::before {
  top: 5px;
  width: 10px;
  height: 10px;
- background: linear-gradient(45deg, purple, cyan);
+ background: linear-gradient(45deg, #8e2de2, #4facfe);
  border-radius: 50%;
 }
 
 /* 8. Tabla */
+table {
+ border-collapse: collapse;
+ width: 300px;
+ background: rgba(255,255,255,0.08);
+ color: white;
+}
+
+th, td {
+ padding: 10px;
+ border: 1px solid rgba(255,255,255,0.15);
+}
+
 th {
- background: linear-gradient(to right, #4facfe, #00f2fe);
+ background: linear-gradient(to right, #396afc, #2948ff);
  color: white;
 }
 
 tr.highlight {
- background: linear-gradient(to right, #43e97b, #38f9d7);
+ background: linear-gradient(to right, #00b09b, #96c93d);
 }
 
 /* 9. Bordes */
 .borde-gradiente {
- border: 5px solid;
- border-image: linear-gradient(45deg, red, blue) 1;
+ position: relative;
  padding: 20px;
+ border-radius: 14px;
+ background: #ffffff;
+ color: #222;
+ z-index: 1;
+ overflow: hidden;
+}
+
+.borde-gradiente::before {
+ content: "";
+ position: absolute;
+ inset: 0;
+ padding: 4px;
+ border-radius: 14px;
+ background: linear-gradient(270deg, #ff512f, #dd2476, #1fa2ff, #00f2fe, #ff512f);
+ background-size: 300% 300%;
+ animation: moverGradiente 4s linear infinite;
+ -webkit-mask:
+   linear-gradient(#fff 0 0) content-box,
+   linear-gradient(#fff 0 0);
+ -webkit-mask-composite: xor;
+ mask-composite: exclude;
+ z-index: -1;
 }
