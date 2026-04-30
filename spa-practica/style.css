@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+#App {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.btn {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
