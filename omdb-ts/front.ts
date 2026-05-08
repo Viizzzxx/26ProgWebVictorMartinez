@@ -58,16 +58,26 @@ function renderMovie(doc: Document, movie: OMDBMovieResponse): void {
     if (!app) return;
 
     app.innerHTML = `
-        <div class="movie">
-            <h2>${movie.Title} (${movie.Year})</h2>
-            <p><strong>Rating:</strong> ${movie.imdbRating}</p>
-            <p><strong>Plot:</strong> ${movie.Plot}</p>
-            <p><strong>Director:</strong> ${movie.Director}</p>
-            <p><strong>Genre:</strong> ${movie.Genre}</p>
-            <img src="${movie.Poster}" alt="${movie.Title}" style="max-width: 300px;" />
-            <pre>${JSON.stringify(movie, null, 2)}</pre>
-        </div>
-    `;
+    <div class="movie">
+        <h2>${movie.Title} (${movie.Year})</h2>
+        <p><strong>Rating:</strong> ${movie.imdbRating}</p>
+        <p><strong>Plot:</strong> ${movie.Plot}</p>
+        <p><strong>Director:</strong> ${movie.Director}</p>
+        <p><strong>Genre:</strong> ${movie.Genre}</p>
+
+        ${movie.Poster !== "N/A"
+            ? `<img 
+                        src="${movie.Poster}" 
+                        alt="${movie.Title}" 
+                        style="max-width: 300px;" 
+                        referrerpolicy="no-referrer"
+                   />`
+            : `<p>No hay póster disponible</p>`
+        }
+
+        <pre>${JSON.stringify(movie, null, 2)}</pre>
+    </div>
+`;
 }
 
 getMovieByImdbId("tt3896198")
