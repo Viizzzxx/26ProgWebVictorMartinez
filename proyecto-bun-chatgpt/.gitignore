@@ -1,0 +1,19 @@
+# Dependencias
+node_modules/
+
+# Archivos generados
+dist/
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Configuración de editores
+.vscode/
+.idea/
+
+# Bun
+bun.lockb

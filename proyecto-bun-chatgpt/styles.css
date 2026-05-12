@@ -1,0 +1,158 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f0f0f0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.contenedor {
+    width: 420px;
+    max-width: 94vw;
+}
+
+.chat {
+    width: 100%;
+    height: 70vh;
+    background: white;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+    padding: 10px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.lista-mensajes {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mensaje {
+    display: flex;
+    flex-direction: column;
+    margin: 6px 0;
+    padding: 4px 8px;
+}
+
+.mensaje span {
+    width: 36px;
+    height: 36px;
+    background: #eeeeee;
+    font-size: 12px;
+    font-weight: bold;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+}
+
+.mensaje p {
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: 4px;
+    max-width: 80%;
+}
+
+.usuario {
+    align-self: flex-end;
+    align-items: flex-end;
+}
+
+.usuario span,
+.usuario p {
+    background: rgb(219, 236, 255);
+}
+
+.bot {
+    align-self: flex-start;
+}
+
+.bot span,
+.bot p {
+    background: rgb(198, 255, 220);
+}
+
+.formulario {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.caja-texto {
+    border-radius: 20px;
+    flex-grow: 1;
+    padding: 9px;
+    border: 1px solid #cccccc;
+}
+
+.boton-enviar {
+    background: #0099ff;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 9px 14px;
+    transition: background 0.3s ease;
+}
+
+.boton-enviar:hover {
+    background: rgb(0, 104, 173);
+}
+
+.boton-enviar:disabled {
+    background: #cccccc;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.estado {
+    display: block;
+    font-size: 11px;
+    color: #555555;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.cargando {
+    text-align: center;
+    display: grid;
+    place-items: center;
+    height: 60vh;
+}
+
+.cargando-contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icono-carga {
+    width: 35px;
+    height: 35px;
+    border: 5px solid #eeeeee;
+    border-top-color: #3e67ec;
+    border-radius: 50%;
+    animation: girar 1s linear infinite;
+}
+
+.titulo-carga {
+    color: #444444;
+    margin-bottom: 8px;
+}
+
+.texto-carga {
+    font-weight: normal;
+    margin: 0;
+    font-size: 11px;
+    color: #777777;
+}
+
+@keyframes girar {
+    100% {
+        transform: rotate(360deg);
+    }
+}
