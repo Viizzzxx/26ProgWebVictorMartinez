@@ -130,7 +130,7 @@ export async function rutasUsuarios(req: Request, url: URL) {
         if (!usuario) {
             return Response.json(
                 { mensaje: "Usuario no encontrado" },
-                { status: 404 }
+                { status: 404 }     
             );
         }
 

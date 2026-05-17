@@ -13,7 +13,26 @@ services:
       - "5434:5432"
 
     volumes:
-      - postgres_microservicio_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+
+  bun_app:
+    build: .
+    image: practica-microservicio-bun:latest
+    container_name: api_microservicio_bun
+    restart: unless-stopped
+
+    ports:
+      - "3000:3000"
+
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASSWORD: admin123
+      DB_NAME: escuela
+
+    depends_on:
+      - postgres
 
 volumes:
-  postgres_microservicio_data:
+  postgres_data:
