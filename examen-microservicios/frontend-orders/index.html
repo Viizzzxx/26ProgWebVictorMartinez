@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Pedidos</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Microservicio de Pedidos</h1>
+      <p class="descripcion">
+        Frontend SPA desarrollado con Bun, TypeScript, Fetch API y manipulación dinámica del DOM.
+      </p>
+
+      <form id="formPedido" class="formulario">
+        <input type="text" id="nombreUsuario" placeholder="Nombre del usuario" required />
+        <input type="text" id="nombreProducto" placeholder="Nombre del producto" required />
+        <input type="number" id="cantidad" placeholder="Cantidad" min="1" required />
+        <button type="submit">Guardar pedido</button>
+      </form>
+
+      <p id="mensaje" class="mensaje"></p>
+    </section>
+
+    <section class="card">
+      <h2>Lista de pedidos</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tablaPedidos">
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script type="module" src="./dist/main.js"></script>
+</body>
+</html>

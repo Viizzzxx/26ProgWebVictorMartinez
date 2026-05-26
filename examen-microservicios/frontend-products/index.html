@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Productos</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Microservicio de Productos</h1>
+      <p class="descripcion">
+        Frontend SPA desarrollado con Bun, TypeScript, Fetch API y manipulación dinámica del DOM.
+      </p>
+
+      <form id="formProducto" class="formulario">
+        <input type="text" id="nombre" placeholder="Nombre del producto" required />
+        <input type="number" id="precio" placeholder="Precio" step="0.01" min="0" required />
+        <input type="number" id="stock" placeholder="Stock" min="0" required />
+        <button type="submit">Guardar producto</button>
+      </form>
+
+      <p id="mensaje" class="mensaje"></p>
+    </section>
+
+    <section class="card">
+      <h2>Lista de productos</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tablaProductos">
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script type="module" src="./dist/main.js"></script>
+</body>
+</html>

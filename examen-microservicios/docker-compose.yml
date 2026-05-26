@@ -1,0 +1,92 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: examen_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: examen_microservicios
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend-users:
+    build: ./backend-users
+    container_name: backend_users
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASSWORD: admin123
+      DB_NAME: examen_microservicios
+    depends_on:
+      - postgres
+
+  frontend-users:
+    build: ./frontend-users
+    container_name: frontend_users
+    restart: always
+    ports:
+      - "5171:5171"
+    depends_on:
+      - backend-users
+
+  backend-products:
+    build: ./backend-products
+    container_name: backend_products
+    restart: always
+    ports:
+      - "3002:3002"
+    environment:
+      PORT: 3002
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASSWORD: admin123
+      DB_NAME: examen_microservicios
+    depends_on:
+      - postgres
+
+  frontend-products:
+    build: ./frontend-products
+    container_name: frontend_products
+    restart: always
+    ports:
+      - "5172:5172"
+    depends_on:
+      - backend-products
+
+  backend-orders:
+    build: ./backend-orders
+    container_name: backend_orders
+    restart: always
+    ports:
+      - "3003:3003"
+    environment:
+      PORT: 3003
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASSWORD: admin123
+      DB_NAME: examen_microservicios
+    depends_on:
+      - postgres
+
+  frontend-orders:
+    build: ./frontend-orders
+    container_name: frontend_orders
+    restart: always
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend-orders
+
+volumes:
+  postgres_data:

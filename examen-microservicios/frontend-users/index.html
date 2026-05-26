@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Usuarios</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Microservicio de Usuarios</h1>
+      <p class="descripcion">
+        Frontend SPA desarrollado con Bun, TypeScript, Fetch API y manipulación dinámica del DOM.
+      </p>
+
+      <form id="formUsuario" class="formulario">
+        <input type="text" id="nombre" placeholder="Nombre del usuario" required />
+        <input type="email" id="correo" placeholder="Correo del usuario" required />
+        <button type="submit">Guardar usuario</button>
+      </form>
+
+      <p id="mensaje" class="mensaje"></p>
+    </section>
+
+    <section class="card">
+      <h2>Lista de usuarios</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tablaUsuarios">
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script type="module" src="./dist/main.js"></script>
+</body>
+</html>
