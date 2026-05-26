@@ -11,6 +11,16 @@ Vagrant.configure("2") do |config|
   # https://docs.vagrantup.com.
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
+    # Puertos de los backends del proyecto
+  config.vm.network "forwarded_port", guest: 3001, host: 3001
+  config.vm.network "forwarded_port", guest: 3002, host: 3002
+  config.vm.network "forwarded_port", guest: 3003, host: 3003
+
+  # Puertos de los frontends del proyecto
+  config.vm.network "forwarded_port", guest: 5171, host: 5171
+  config.vm.network "forwarded_port", guest: 5172, host: 5172
+  config.vm.network "forwarded_port", guest: 5173, host: 5173
+
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "base"
