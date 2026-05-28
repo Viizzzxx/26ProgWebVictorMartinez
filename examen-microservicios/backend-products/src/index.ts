@@ -1,9 +1,16 @@
-import { manejarRutasProductos } from "./interfaces/productoRoutes";
+import { ProductoRepository } from "./infrastructure/ProductoRepository";
+import { ProductoService } from "./application/ProductoService";
+import { manejarRutasProductos, respuestaJSON } from "./interfaces/productoRoutes";
+
+// Composition Root: crear instancias e inyectar dependencias
+const repository = new ProductoRepository();
+const service = new ProductoService(repository);
 
 const PORT = Number(process.env.PORT) || 3002;
 
 Bun.serve({
   port: PORT,
+  hostname: "0.0.0.0",
 
   async fetch(req) {
     const url = new URL(req.url);
@@ -20,23 +27,19 @@ Bun.serve({
     }
 
     if (url.pathname === "/") {
-      return new Response(
-        JSON.stringify({
-          mensaje: "Backend de productos funcionando correctamente",
-          servicio: "backend-products",
-          entidad: "productos",
-          puerto: PORT,
-        }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
+      return respuestaJSON({
+        mensaje: "Backend de productos funcionando correctamente",
+        servicio: "backend-products",
+        entidad: "productos",
+        puerto: PORT,
+      });
     }
 
-    return await manejarRutasProductos(req);
+    if (req.method === "GET" && url.pathname === "/health") {
+      return respuestaJSON({ status: "ok", service: "backend-products" });
+    }
+
+    return await manejarRutasProductos(req, service);
   },
 });
 

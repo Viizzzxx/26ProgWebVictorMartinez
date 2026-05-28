@@ -1,7 +1,8 @@
 import { pool } from "./db";
 import type { Producto } from "../domain/Producto";
+import type { IProductoRepository } from "../domain/IProductoRepository";
 
-export class ProductoRepository {
+export class ProductoRepository implements IProductoRepository {
   async obtenerTodos(): Promise<Producto[]> {
     const resultado = await pool.query(
       "SELECT id, nombre, precio, stock, fecha_creacion FROM productos ORDER BY id ASC"

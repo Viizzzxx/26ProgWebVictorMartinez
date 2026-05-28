@@ -12,6 +12,13 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d examen_microservicios"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - examen_net
 
   backend-users:
     build: ./backend-users
@@ -27,7 +34,10 @@ services:
       DB_PASSWORD: admin123
       DB_NAME: examen_microservicios
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+    networks:
+      - examen_net
 
   frontend-users:
     build: ./frontend-users
@@ -37,6 +47,8 @@ services:
       - "5171:5171"
     depends_on:
       - backend-users
+    networks:
+      - examen_net
 
   backend-products:
     build: ./backend-products
@@ -52,7 +64,10 @@ services:
       DB_PASSWORD: admin123
       DB_NAME: examen_microservicios
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+    networks:
+      - examen_net
 
   frontend-products:
     build: ./frontend-products
@@ -62,6 +77,8 @@ services:
       - "5172:5172"
     depends_on:
       - backend-products
+    networks:
+      - examen_net
 
   backend-orders:
     build: ./backend-orders
@@ -77,7 +94,10 @@ services:
       DB_PASSWORD: admin123
       DB_NAME: examen_microservicios
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+    networks:
+      - examen_net
 
   frontend-orders:
     build: ./frontend-orders
@@ -87,6 +107,12 @@ services:
       - "5173:5173"
     depends_on:
       - backend-orders
+    networks:
+      - examen_net
 
 volumes:
   postgres_data:
+
+networks:
+  examen_net:
+    driver: bridge

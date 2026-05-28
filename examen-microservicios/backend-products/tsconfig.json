@@ -5,6 +5,9 @@
     "moduleResolution": "Bundler",
     "strict": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "types": ["bun-types"],
     "outDir": "dist"
   },
   "include": ["src"]

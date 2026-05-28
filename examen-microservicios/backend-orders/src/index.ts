@@ -1,9 +1,16 @@
-import { manejarRutasPedidos } from "./interfaces/pedidoRoutes";
+import { PedidoRepository } from "./infrastructure/PedidoRepository";
+import { PedidoService } from "./application/PedidoService";
+import { manejarRutasPedidos, respuestaJSON } from "./interfaces/pedidoRoutes";
+
+// Composition Root: crear instancias e inyectar dependencias
+const repository = new PedidoRepository();
+const service = new PedidoService(repository);
 
 const PORT = Number(process.env.PORT) || 3003;
 
 Bun.serve({
   port: PORT,
+  hostname: "0.0.0.0",
 
   async fetch(req) {
     const url = new URL(req.url);
@@ -20,23 +27,19 @@ Bun.serve({
     }
 
     if (url.pathname === "/") {
-      return new Response(
-        JSON.stringify({
-          mensaje: "Backend de pedidos funcionando correctamente",
-          servicio: "backend-orders",
-          entidad: "pedidos",
-          puerto: PORT,
-        }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
+      return respuestaJSON({
+        mensaje: "Backend de pedidos funcionando correctamente",
+        servicio: "backend-orders",
+        entidad: "pedidos",
+        puerto: PORT,
+      });
     }
 
-    return await manejarRutasPedidos(req);
+    if (req.method === "GET" && url.pathname === "/health") {
+      return respuestaJSON({ status: "ok", service: "backend-orders" });
+    }
+
+    return await manejarRutasPedidos(req, service);
   },
 });
 

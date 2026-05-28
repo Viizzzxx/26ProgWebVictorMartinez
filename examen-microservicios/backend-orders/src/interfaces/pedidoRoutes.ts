@@ -1,8 +1,9 @@
-import { PedidoService } from "../application/PedidoService";
+import type { PedidoService } from "../application/PedidoService";
 
-const pedidoService = new PedidoService();
-
-export async function manejarRutasPedidos(req: Request): Promise<Response> {
+export async function manejarRutasPedidos(
+  req: Request,
+  service: PedidoService
+): Promise<Response> {
   const url = new URL(req.url);
   const metodo = req.method;
   const partes = url.pathname.split("/").filter(Boolean);
@@ -13,7 +14,7 @@ export async function manejarRutasPedidos(req: Request): Promise<Response> {
 
   try {
     if (metodo === "GET" && partes.length === 1) {
-      const pedidos = await pedidoService.listarPedidos();
+      const pedidos = await service.listarPedidos();
       return respuestaJSON(pedidos);
     }
 
@@ -24,7 +25,7 @@ export async function manejarRutasPedidos(req: Request): Promise<Response> {
         return respuestaJSON({ mensaje: "ID inválido" }, 400);
       }
 
-      const pedido = await pedidoService.buscarPedido(id);
+      const pedido = await service.buscarPedido(id);
 
       if (!pedido) {
         return respuestaJSON({ mensaje: "Pedido no encontrado" }, 404);
@@ -35,7 +36,7 @@ export async function manejarRutasPedidos(req: Request): Promise<Response> {
 
     if (metodo === "POST" && partes.length === 1) {
       const body = await req.json();
-      const nuevoPedido = await pedidoService.crearPedido(body);
+      const nuevoPedido = await service.crearPedido(body);
 
       return respuestaJSON(nuevoPedido, 201);
     }
@@ -48,7 +49,7 @@ export async function manejarRutasPedidos(req: Request): Promise<Response> {
       }
 
       const body = await req.json();
-      const pedidoActualizado = await pedidoService.actualizarPedido(id, body);
+      const pedidoActualizado = await service.actualizarPedido(id, body);
 
       if (!pedidoActualizado) {
         return respuestaJSON({ mensaje: "Pedido no encontrado" }, 404);
@@ -64,7 +65,7 @@ export async function manejarRutasPedidos(req: Request): Promise<Response> {
         return respuestaJSON({ mensaje: "ID inválido" }, 400);
       }
 
-      const eliminado = await pedidoService.eliminarPedido(id);
+      const eliminado = await service.eliminarPedido(id);
 
       if (!eliminado) {
         return respuestaJSON({ mensaje: "Pedido no encontrado" }, 404);

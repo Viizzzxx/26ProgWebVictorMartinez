@@ -1,11 +1,11 @@
 import type { Producto } from "../domain/Producto";
-import { ProductoRepository } from "../infrastructure/ProductoRepository";
+import type { IProductoRepository } from "../domain/IProductoRepository";
 
 export class ProductoService {
-  private repository: ProductoRepository;
+  private repository: IProductoRepository;
 
-  constructor() {
-    this.repository = new ProductoRepository();
+  constructor(repository: IProductoRepository) {
+    this.repository = repository;
   }
 
   async listarProductos(): Promise<Producto[]> {

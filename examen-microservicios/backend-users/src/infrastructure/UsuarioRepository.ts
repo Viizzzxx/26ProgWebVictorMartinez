@@ -1,7 +1,8 @@
 import { pool } from "./db";
 import type { Usuario } from "../domain/Usuario";
+import type { IUsuarioRepository } from "../domain/IUsuarioRepository";
 
-export class UsuarioRepository {
+export class UsuarioRepository implements IUsuarioRepository {
   async obtenerTodos(): Promise<Usuario[]> {
     const resultado = await pool.query(
       "SELECT id, nombre, correo, fecha_creacion FROM usuarios ORDER BY id ASC"

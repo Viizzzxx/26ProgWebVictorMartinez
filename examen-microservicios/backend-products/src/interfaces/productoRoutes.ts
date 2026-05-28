@@ -1,8 +1,9 @@
-import { ProductoService } from "../application/ProductoService";
+import type { ProductoService } from "../application/ProductoService";
 
-const productoService = new ProductoService();
-
-export async function manejarRutasProductos(req: Request): Promise<Response> {
+export async function manejarRutasProductos(
+  req: Request,
+  service: ProductoService
+): Promise<Response> {
   const url = new URL(req.url);
   const metodo = req.method;
   const partes = url.pathname.split("/").filter(Boolean);
@@ -13,7 +14,7 @@ export async function manejarRutasProductos(req: Request): Promise<Response> {
 
   try {
     if (metodo === "GET" && partes.length === 1) {
-      const productos = await productoService.listarProductos();
+      const productos = await service.listarProductos();
       return respuestaJSON(productos);
     }
 
@@ -24,7 +25,7 @@ export async function manejarRutasProductos(req: Request): Promise<Response> {
         return respuestaJSON({ mensaje: "ID inválido" }, 400);
       }
 
-      const producto = await productoService.buscarProducto(id);
+      const producto = await service.buscarProducto(id);
 
       if (!producto) {
         return respuestaJSON({ mensaje: "Producto no encontrado" }, 404);
@@ -35,7 +36,7 @@ export async function manejarRutasProductos(req: Request): Promise<Response> {
 
     if (metodo === "POST" && partes.length === 1) {
       const body = await req.json();
-      const nuevoProducto = await productoService.crearProducto(body);
+      const nuevoProducto = await service.crearProducto(body);
 
       return respuestaJSON(nuevoProducto, 201);
     }
@@ -48,7 +49,7 @@ export async function manejarRutasProductos(req: Request): Promise<Response> {
       }
 
       const body = await req.json();
-      const productoActualizado = await productoService.actualizarProducto(id, body);
+      const productoActualizado = await service.actualizarProducto(id, body);
 
       if (!productoActualizado) {
         return respuestaJSON({ mensaje: "Producto no encontrado" }, 404);
@@ -64,7 +65,7 @@ export async function manejarRutasProductos(req: Request): Promise<Response> {
         return respuestaJSON({ mensaje: "ID inválido" }, 400);
       }
 
-      const eliminado = await productoService.eliminarProducto(id);
+      const eliminado = await service.eliminarProducto(id);
 
       if (!eliminado) {
         return respuestaJSON({ mensaje: "Producto no encontrado" }, 404);

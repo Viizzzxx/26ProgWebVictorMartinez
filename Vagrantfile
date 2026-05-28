@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   # https://docs.vagrantup.com.
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
-    # Puertos de los backends del proyecto
+  # Puertos de los backends del proyecto
   config.vm.network "forwarded_port", guest: 3001, host: 3001
   config.vm.network "forwarded_port", guest: 3002, host: 3002
   config.vm.network "forwarded_port", guest: 3003, host: 3003

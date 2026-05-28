@@ -1,11 +1,11 @@
 import type { Pedido } from "../domain/Pedido";
-import { PedidoRepository } from "../infrastructure/PedidoRepository";
+import type { IPedidoRepository } from "../domain/IPedidoRepository";
 
 export class PedidoService {
-  private repository: PedidoRepository;
+  private repository: IPedidoRepository;
 
-  constructor() {
-    this.repository = new PedidoRepository();
+  constructor(repository: IPedidoRepository) {
+    this.repository = repository;
   }
 
   async listarPedidos(): Promise<Pedido[]> {

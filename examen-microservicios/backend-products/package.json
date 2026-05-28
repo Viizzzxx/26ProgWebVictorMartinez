@@ -4,12 +4,16 @@
   "type": "module",
   "scripts": {
     "dev": "bun run src/index.ts",
-    "start": "bun run src/index.ts"
+    "start": "bun run src/index.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "pg": "^8.21.0"
+    "pg": "latest"
   },
   "devDependencies": {
-    "@types/pg": "^8.20.0"
+    "@types/pg": "latest",
+    "@types/bun": "latest",
+    "typescript": "latest"
   }
 }

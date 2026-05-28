@@ -1,11 +1,11 @@
 import type { Usuario } from "../domain/Usuario";
-import { UsuarioRepository } from "../infrastructure/UsuarioRepository";
+import type { IUsuarioRepository } from "../domain/IUsuarioRepository";
 
 export class UsuarioService {
-  private repository: UsuarioRepository;
+  private repository: IUsuarioRepository;
 
-  constructor() {
-    this.repository = new UsuarioRepository();
+  constructor(repository: IUsuarioRepository) {
+    this.repository = repository;
   }
 
   async listarUsuarios(): Promise<Usuario[]> {

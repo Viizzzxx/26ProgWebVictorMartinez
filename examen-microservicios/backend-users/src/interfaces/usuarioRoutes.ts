@@ -1,8 +1,9 @@
-import { UsuarioService } from "../application/UsuarioService";
+import type { UsuarioService } from "../application/UsuarioService";
 
-const usuarioService = new UsuarioService();
-
-export async function manejarRutasUsuarios(req: Request): Promise<Response> {
+export async function manejarRutasUsuarios(
+  req: Request,
+  service: UsuarioService
+): Promise<Response> {
   const url = new URL(req.url);
   const metodo = req.method;
   const partes = url.pathname.split("/").filter(Boolean);
@@ -13,7 +14,7 @@ export async function manejarRutasUsuarios(req: Request): Promise<Response> {
 
   try {
     if (metodo === "GET" && partes.length === 1) {
-      const usuarios = await usuarioService.listarUsuarios();
+      const usuarios = await service.listarUsuarios();
       return respuestaJSON(usuarios);
     }
 
@@ -24,7 +25,7 @@ export async function manejarRutasUsuarios(req: Request): Promise<Response> {
         return respuestaJSON({ mensaje: "ID inválido" }, 400);
       }
 
-      const usuario = await usuarioService.buscarUsuario(id);
+      const usuario = await service.buscarUsuario(id);
 
       if (!usuario) {
         return respuestaJSON({ mensaje: "Usuario no encontrado" }, 404);
@@ -35,7 +36,7 @@ export async function manejarRutasUsuarios(req: Request): Promise<Response> {
 
     if (metodo === "POST" && partes.length === 1) {
       const body = await req.json();
-      const nuevoUsuario = await usuarioService.crearUsuario(body);
+      const nuevoUsuario = await service.crearUsuario(body);
 
       return respuestaJSON(nuevoUsuario, 201);
     }
@@ -48,7 +49,7 @@ export async function manejarRutasUsuarios(req: Request): Promise<Response> {
       }
 
       const body = await req.json();
-      const usuarioActualizado = await usuarioService.actualizarUsuario(id, body);
+      const usuarioActualizado = await service.actualizarUsuario(id, body);
 
       if (!usuarioActualizado) {
         return respuestaJSON({ mensaje: "Usuario no encontrado" }, 404);
@@ -64,7 +65,7 @@ export async function manejarRutasUsuarios(req: Request): Promise<Response> {
         return respuestaJSON({ mensaje: "ID inválido" }, 400);
       }
 
-      const eliminado = await usuarioService.eliminarUsuario(id);
+      const eliminado = await service.eliminarUsuario(id);
 
       if (!eliminado) {
         return respuestaJSON({ mensaje: "Usuario no encontrado" }, 404);
